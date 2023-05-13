@@ -1,0 +1,1 @@
+This is my NodeJs and Express Project! This, of course is going to take a long time to finish and it is going to take me more than a month. It is in the M(ongo)E(xpress)R(eact)N(ode) Stact. It is a Client and Server Project, A full Stack Application!
