@@ -2,16 +2,32 @@ const express = require('express')
 const app = express();
 const PORT = 3000;
 
-
-app.get('/', (re, res) => {
-    res.send({
+const friends = [
+    {
+        id: 0,
+        name: 'Oluwafemi Arnold',
+    },
+    {
         id: 1,
-        name: 'Oluwafemi',
-        age: 37,
-        address: '23, Fagbeyiro Abayomi Street,Alakuko, Lagos'
-    });
+        name: 'Bolu Akinwande'
+    }
+];
+
+app.get('/friends', (req, res) => {
+    res.json(friends);
 });
 
+app.get('/friends/:friendID', (req, res) =>{
+    const friendID = Number(req.params.friendID)
+    const friend = friends[friendID]
+    if (friend){
+        res.json(friend)
+    }else{
+        res.status(404).json({
+            error: 'Friend does not exist'
+        })
+    }
+})
 app.get('/messages', (req, res) => {
     res.send('<ul>Hello Oluwafemi Olusesi Ogundare</ul>')
 });
