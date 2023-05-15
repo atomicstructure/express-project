@@ -13,6 +13,30 @@ const friends = [
     }
 ];
 
+app.use((req, res, next) => {
+    const start = Date.now();
+    next();
+    const nown = Date.now() - start;
+    console.log(`${req.method} ${req.url} ${nown}ms`);
+
+});
+
+app.use(express.json());
+app.post('/friends', (req, res) => {
+    if (!req.body.name){
+        return res.status(400).json({
+            error: 'Missing friends name'
+        })
+    }
+    const newFriend = {
+        id: friends.length,
+        name: req.body.name,
+    };
+    friends.push(newFriend);
+
+    res.json(newFriend);
+});
+
 app.get('/friends', (req, res) => {
     res.json(friends);
 });
@@ -40,4 +64,4 @@ app.post('/messages', (req, res) =>{
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
-})
+});
